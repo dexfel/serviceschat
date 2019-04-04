@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "825693221069",
+    "firebase_url": "https://serviceschat-1e8f8.firebaseio.com",
+    "project_id": "serviceschat-1e8f8",
+    "storage_bucket": "serviceschat-1e8f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825693221069:android:7e4747ac5e6afc25",
+        "android_client_info": {
+          "package_name": "com.example.serviceschat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825693221069-5plfln4v2f135pt46lf6vtc6q8iuiq57.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.serviceschat",
+            "certificate_hash": "1e4cde787cd342d720fb20cb3745ba4331947670"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8oijA_5Gyo8IoH2l0J_aJbOtKbUSX0Bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825693221069-pb1cpbaa8fgga7l9ct0lm71ot7hhduri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
