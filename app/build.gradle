@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 28
@@ -23,17 +23,19 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'})
+
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
         //DISEÑO
-        implementation 'com.android.support:recyclerview-v7:28.0.0'//lista
-        implementation 'com.android.support:cardview-v7:28.0.0'  //tarjeta
+        implementation 'com.android.support:recyclerview-v7:28.0.0'
+        implementation 'com.android.support:cardview-v7:28.0.0'
 
         //firebase
-        implementation'com.google.firebase:firebase-database:16.1.0' //base datos
-        implementation 'com.google.firebase:firebase-storage:16.1.0' //base de archivos
+        implementation'com.google.firebase:firebase-database:16.1.0'
+        implementation 'com.google.firebase:firebase-storage:16.1.0'
         implementation 'com.google.firebase:firebase-auth:16.2.0'
 
         //Agregados
@@ -48,3 +50,4 @@ dependencies {
 
 
 }
+apply plugin: 'com.google.gms.google-services'
