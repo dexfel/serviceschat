@@ -5,15 +5,19 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdaterMensajes extends RecyclerView.Adapter<HolderMensaje> {
-    private List<Mensaje> listMensaje;
+    private List<Mensaje> listMensaje= new ArrayList<>();
     private Context c;
 
-    public AdaterMensajes(List<Mensaje> listMensaje, Context c) {
-        this.listMensaje = listMensaje;
+    public AdaterMensajes(Context c) {
         this.c = c;
+    }
+    public void addMensaje (Mensaje m){
+        listMensaje.add(m);
+        
     }
 
     @NonNull
