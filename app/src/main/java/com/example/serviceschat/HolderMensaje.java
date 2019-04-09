@@ -66,6 +66,5 @@ public class HolderMensaje extends RecyclerView.ViewHolder {
         this.fotoMensajePerfil = fotoMensajePerfil;
 
 
-
     }
 }

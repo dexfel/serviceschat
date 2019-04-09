@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,12 @@ holder.getNombre().setText(listMensaje.get(position).getNombre());
 holder.getMensaje().setText(listMensaje.get(position).getMensaje());
 holder.getHora().setText(listMensaje.get(position).getHora());
 if(listMensaje.get(position).getType_mensaje().equals("2")){
-
+holder.getFotoMensaje().setVisibility(View.VISIBLE);
+holder.getMensaje().setVisibility(View.VISIBLE);
+    Glide.with(c).load(listMensaje.get(position).getUrlFoto());
+}else if(listMensaje.get(position).getType_mensaje().equals("1")) {
+    holder.getFotoMensaje().setVisibility(View.GONE);
+    holder.getMensaje().setVisibility(View.VISIBLE);
 }
     }
 
