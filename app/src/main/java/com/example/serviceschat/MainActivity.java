@@ -127,15 +127,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode==PHOTO_SEND && requestCode== RESULT_OK){
+        if (requestCode == PHOTO_SEND && resultCode == RESULT_OK){
             final Uri u =data.getData();
             storageReference =storage.getReference("imagenes");
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
             fotoReferencia.putFile(u).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    
+                    Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
                     Mensaje m = new Mensaje("Daniel te ha enviado una foto", u.toString(), nombre.getText().toString(),"","2", "00:00");
                     databaseReference.push().setValue(m);
                 }
