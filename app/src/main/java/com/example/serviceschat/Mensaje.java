@@ -57,14 +57,6 @@ private String type_mensaje;
         this.type_mensaje = type_mensaje;
     }
 
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
     public String getUrlFoto() {
         return urlFoto;
     }
