@@ -35,6 +35,9 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
 holder.getNombre().setText(listMensaje.get(position).getNombre());
 holder.getMensaje().setText(listMensaje.get(position).getMensaje());
 holder.getHora().setText(listMensaje.get(position).getHora());
+if(listMensaje.get(position).getType_mensaje().equals("2")){
+
+}
     }
 
     @Override
