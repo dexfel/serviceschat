@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         databaseReference.push().setValue(new Mensaje(txtMensaje.getText().toString(),nombre.getText().toString(),"","1","00:00"));
+         databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),nombre.getText().toString(),"","1", ServerValue.TIMESTAMP));
          txtMensaje.setText("");
             }
         });
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-             Mensaje m =dataSnapshot.getValue(Mensaje.class);
+             MensajeRecibir m =dataSnapshot.getValue(MensajeRecibir.class);
                 adapter.addMensaje(m);
             }
 
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
-                    Mensaje m = new Mensaje("Daniel te ha enviado una foto", u.toString(), nombre.getText().toString(),"","2", ServerValue.TIMESTAMP);
+                    MensajeEnviar m = new MensajeEnviar("Daniel te ha enviado una foto", u.toString(), nombre.getText().toString(),"","2", ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                 }
 

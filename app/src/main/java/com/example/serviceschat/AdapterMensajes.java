@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
-    private List<Mensaje> listMensaje= new ArrayList<>();
+    private List<MensajeRecibir> listMensaje= new ArrayList<>();
     private Context c;
 
     public AdapterMensajes(Context c) {
         this.c = c;
     }
-    public void addMensaje (Mensaje m){
+    public void addMensaje (MensajeRecibir m){
         listMensaje.add(m);
         notifyItemInserted(listMensaje.size());
 
@@ -36,7 +36,7 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
     public void onBindViewHolder(HolderMensaje holder, int position) {
 holder.getNombre().setText(listMensaje.get(position).getNombre());
 holder.getMensaje().setText(listMensaje.get(position).getMensaje());
-holder.getHora().setText(listMensaje.get(position).getHora());
+//holder.getHora().setText(listMensaje.get(position).getHora());
 if(listMensaje.get(position).getType_mensaje().equals("2")){
 holder.getFotoMensaje().setVisibility(View.VISIBLE);
 holder.getMensaje().setVisibility(View.VISIBLE);
