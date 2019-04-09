@@ -12,11 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,8 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -125,20 +122,24 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setScrollbar(){
         rvMensajes.scrollToPosition(adapter.getItemCount()-1);
-    }
 
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode==PHOTO_SEND && requestCode== RESULT_OK){
-            Uri u =data.getData();
+            final Uri u =data.getData();
             storageReference =storage.getReference("imagenes");
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fotoReferencia.putFile(u).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //Uri u = taskSnapshot.getDownloadUrl(); //min 36:48
+                    
+                    Mensaje m = new Mensaje("Daniel te ha enviado una foto", u.toString(), nombre.getText().toString(),"","2", "00:00");
+                    databaseReference.push().setValue(m);
                 }
+
             });
         }
     }
