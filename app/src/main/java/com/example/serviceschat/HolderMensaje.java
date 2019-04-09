@@ -54,7 +54,18 @@ public class HolderMensaje extends RecyclerView.ViewHolder {
         return fotoMensajePerfil;
     }
 
+    public ImageView getFotoMensaje() {
+        return fotoMensaje;
+    }
+
+    public void setFotoMensaje(ImageView fotoMensaje) {
+        this.fotoMensaje = fotoMensaje;
+    }
+
     public void setFotoMensajePerfil(CircleImageView fotoMensajePerfil) {
         this.fotoMensajePerfil = fotoMensajePerfil;
+
+
+
     }
 }
