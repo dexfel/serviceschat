@@ -38,9 +38,9 @@ holder.getNombre().setText(listMensaje.get(position).getNombre());
 holder.getMensaje().setText(listMensaje.get(position).getMensaje());
 //holder.getHora().setText(listMensaje.get(position).getHora());
 if(listMensaje.get(position).getType_mensaje().equals("2")){
-holder.getFotoMensaje().setVisibility(View.VISIBLE);
-holder.getMensaje().setVisibility(View.VISIBLE);
-Glide.with(c).load(listMensaje.get(position).getUrlFoto()).into(holder.getFotoMensaje());
+        holder.getFotoMensaje().setVisibility(View.VISIBLE);
+        holder.getMensaje().setVisibility(View.VISIBLE);
+        Glide.with(c).load(listMensaje.get(position).getUrlFoto()).into(holder.getFotoMensaje());
 }else if(listMensaje.get(position).getType_mensaje().equals("1")) {
     holder.getFotoMensaje().setVisibility(View.GONE);
     holder.getMensaje().setVisibility(View.VISIBLE);
