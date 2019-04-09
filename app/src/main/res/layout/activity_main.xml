@@ -26,7 +26,7 @@
             android:id="@+id/nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DANIEL"
+            android:text="Umg progra 3"
             android:layout_gravity="center"/>
 
     </LinearLayout>
