@@ -6,26 +6,23 @@ private String urlFoto;
 private String nombre;
 private String fotoPerfil;
 private String type_mensaje;
-private String hora;
 
     public Mensaje() {
     }
 
-    public Mensaje(String mensaje, String nombre, String fotoPerfil, String type_mensaje, String hora) {
+    public Mensaje(String mensaje, String nombre, String fotoPerfil, String type_mensaje) {
         this.mensaje = mensaje;
         this.nombre = nombre;
         this.fotoPerfil = fotoPerfil;
         this.type_mensaje = type_mensaje;
-        this.hora = hora;
     }
 
-    public Mensaje(String mensaje, String urlFoto, String nombre, String fotoPerfil, String type_mensaje, String hora) {
+    public Mensaje(String mensaje, String urlFoto, String nombre, String fotoPerfil, String type_mensaje){
         this.mensaje = mensaje;
         this.urlFoto = urlFoto;
         this.nombre = nombre;
         this.fotoPerfil = fotoPerfil;
         this.type_mensaje = type_mensaje;
-        this.hora = hora;
     }
 
     public String getMensaje() {

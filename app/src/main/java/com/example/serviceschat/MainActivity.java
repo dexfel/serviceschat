@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
-                    Mensaje m = new Mensaje("Daniel te ha enviado una foto", u.toString(), nombre.getText().toString(),"","2", "00:00");
+                    Mensaje m = new Mensaje("Daniel te ha enviado una foto", u.toString(), nombre.getText().toString(),"","2", ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                 }
 
