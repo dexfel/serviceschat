@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -42,19 +43,23 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-    private static final int PHOTO_SEND =1;
+    private static final int PHOTO_SEND = 1;
+    private static final int PHOTO_PERFIL = 2;
+    private String fotoPerfilCadena;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fotoPerfil=(CircleImageView) findViewById(R.id.fotoPerfil);
-        nombre=(TextView) findViewById(R.id.nombre);
-        rvMensajes=(RecyclerView) findViewById(R.id.rvMensajes);
-        txtMensaje=(EditText) findViewById(R.id.txtMensaje);
-        btnEnviar=(Button) findViewById(R.id.btnEnviar);
-        btnEnviarFoto=(ImageButton) findViewById(R.id.btnEnviarFoto);
+        fotoPerfil = (CircleImageView) findViewById(R.id.fotoPerfil);
+        nombre = (TextView) findViewById(R.id.nombre);
+        rvMensajes = (RecyclerView) findViewById(R.id.rvMensajes);
+        txtMensaje = (EditText) findViewById(R.id.txtMensaje);
+        btnEnviar = (Button) findViewById(R.id.btnEnviar);
+        btnEnviarFoto = (ImageButton) findViewById(R.id.btnEnviarFoto);
+        fotoPerfilCadena = "";
 
 
         database = FirebaseDatabase.getInstance();
@@ -70,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(),nombre.getText().toString(),"","1", ServerValue.TIMESTAMP));
-         txtMensaje.setText("");
+                databaseReference.push().setValue(new MensajeEnviar(txtMensaje.getText().toString(), nombre.getText().toString(), fotoPerfilCadena, "1", ServerValue.TIMESTAMP));
+                txtMensaje.setText("");
             }
         });
 
@@ -80,10 +85,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.setType("image/jpeg");
-                i.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-                startActivityForResult(Intent.createChooser(i,"selecciona una foto"),PHOTO_SEND);
+                i.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(i, "selecciona una foto"), PHOTO_SEND);
             }
         });
+
+        fotoPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.setType("image/jpeg");
+                i.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(i, "selecciona una foto"), PHOTO_PERFIL);
+
+            }
+                                      }
+
+
+        );
+
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -95,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-             MensajeRecibir m =dataSnapshot.getValue(MensajeRecibir.class);
+                MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
                 adapter.addMensaje(m);
             }
 
@@ -121,27 +141,44 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void setScrollbar(){
-        rvMensajes.scrollToPosition(adapter.getItemCount()-1);
+
+    private void setScrollbar() {
+        rvMensajes.scrollToPosition(adapter.getItemCount() - 1);
 
     }
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PHOTO_SEND && resultCode == RESULT_OK){
-            final Uri u =data.getData();
-            storageReference =storage.getReference("imagenes");
+        if (requestCode == PHOTO_SEND && resultCode == RESULT_OK) {
+            final Uri u = data.getData();
+            storageReference = storage.getReference("imagenes");
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
-                    MensajeEnviar m = new MensajeEnviar("Daniel te ha enviado una foto", u.toString(), nombre.getText().toString(),"","2", ServerValue.TIMESTAMP);
+                    MensajeEnviar m = new MensajeEnviar("UMG Progra te ha enviado una foto", u.toString(), nombre.getText().toString(), fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                 }
 
             });
-        }
-    }
+        } else if (requestCode == PHOTO_PERFIL && resultCode == RESULT_OK) {
 
+            final Uri u = data.getData();
+            storageReference = storage.getReference("foto_perfil");
+            final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
+            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
+                    fotoPerfilCadena = u.toString();
+                    MensajeEnviar m = new MensajeEnviar("UMG Progra ha actualizado su foto de peril", u.toString(), nombre.getText().toString(), "", "2", ServerValue.TIMESTAMP);
+                    databaseReference.push().setValue(m);
+                    Glide.with(MainActivity.this).load(u.toString()).into(fotoPerfil);
+                }
+            });
+        }
+
+    }
 }

@@ -46,6 +46,12 @@ Glide.with(c).load(listMensaje.get(position).getUrlFoto()).into(holder.getFotoMe
     holder.getFotoMensaje().setVisibility(View.GONE);
     holder.getMensaje().setVisibility(View.VISIBLE);
 }
+
+if(listMensaje.get(position).getFotoPerfil().isEmpty()){
+    holder.getFotoMensajePerfil().setImageResource(R.mipmap.ic_launcher);
+}else{
+    Glide.with(c).load(listMensaje.get(position).getFotoPerfil()).into(holder.getFotoMensajePerfil());
+}
      Long codigoHora = listMensaje.get(position).getHora();
      Date d= new Date(codigoHora);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
