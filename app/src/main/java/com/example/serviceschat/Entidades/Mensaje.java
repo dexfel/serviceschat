@@ -1,4 +1,4 @@
-package com.example.serviceschat;
+package com.example.serviceschat.Entidades;
 
 public class Mensaje {
 private String mensaje;

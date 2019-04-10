@@ -1,4 +1,6 @@
-package com.example.serviceschat;
+package com.example.serviceschat.Entidades;
+
+import com.example.serviceschat.Entidades.Mensaje;
 
 public class MensajeRecibir extends Mensaje {
     private Long hora;

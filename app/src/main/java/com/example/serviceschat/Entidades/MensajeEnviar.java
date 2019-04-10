@@ -1,8 +1,10 @@
-package com.example.serviceschat;
+package com.example.serviceschat.Entidades;
+
+import com.example.serviceschat.Entidades.Mensaje;
 
 import java.util.Map;
 
-public class MensajeEnviar extends  Mensaje{
+public class MensajeEnviar extends Mensaje {
     private Map hora;
 
 

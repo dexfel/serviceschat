@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.serviceschat.Entidades.MensajeRecibir;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
     public void onBindViewHolder(HolderMensaje holder, int position) {
 holder.getNombre().setText(listMensaje.get(position).getNombre());
 holder.getMensaje().setText(listMensaje.get(position).getMensaje());
+
 if(listMensaje.get(position).getType_mensaje().equals("2")){
         holder.getFotoMensaje().setVisibility(View.VISIBLE);
         holder.getMensaje().setVisibility(View.VISIBLE);

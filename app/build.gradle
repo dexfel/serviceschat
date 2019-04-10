@@ -38,6 +38,7 @@ dependencies {
         implementation 'com.google.firebase:firebase-storage:16.1.0'
         implementation 'com.google.firebase:firebase-auth:16.2.0'
 
+
         //Agregados
 
         implementation 'de.hdodenhof:circleimageview:2.2.0'
