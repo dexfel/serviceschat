@@ -62,7 +62,7 @@ public class RegistroActivity extends AppCompatActivity {
                                         usuario.setCorreo(correo);
                                         usuario.setNombre(nombre);
                                         FirebaseUser currentUser =mAuth.getCurrentUser();
-                                        DatabaseReference reference= database.getReference("Usuarios/"+currentUser.getUid());
+                                         DatabaseReference reference= database.getReference("Usuarios/"+currentUser.getUid());
                                         reference.setValue(usuario);
                                         finish();
 

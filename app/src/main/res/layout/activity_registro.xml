@@ -31,10 +31,14 @@
         android:layout_height="wrap_content"
         android:hint="Repetir contraseña"
         android:inputType="textPassword"/>
+
     <Button
         android:id="@+id/idRegistroRegistrar"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Registrar"/>
+        android:hint="Registrar"
+        android:background="@drawable/boton_circular"
+        />
 
 </LinearLayout>
