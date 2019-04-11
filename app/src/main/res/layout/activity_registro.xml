@@ -12,12 +12,14 @@
         android:id="@+id/idRegistroNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_person"
         android:hint="Nombre"
         android:background="@drawable/btn_ln"/>
     <EditText
         android:id="@+id/idRegistroCorreo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_mail"
         android:hint="Correo"
         android:inputType="textEmailAddress"
         android:background="@drawable/btn_ln"/>
@@ -25,6 +27,7 @@
         android:id="@+id/idRegistroContraseña"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_key"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:background="@drawable/btn_ln"/>
@@ -32,6 +35,7 @@
         android:id="@+id/idRegistroContraseñaRepetida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_key"
         android:hint="Repetir contraseña"
         android:inputType="textPassword"
         android:background="@drawable/btn_ln"/>

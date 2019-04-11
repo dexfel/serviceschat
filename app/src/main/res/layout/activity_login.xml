@@ -16,12 +16,14 @@
         android:id="@+id/idCorreoLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_mail"
         android:hint="Correo"
         android:inputType="textEmailAddress"/>
     <EditText
         android:id="@+id/idContraseñaLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_key"
         android:hint="Contraseña"
         android:inputType="textPassword"/>
     <Button
