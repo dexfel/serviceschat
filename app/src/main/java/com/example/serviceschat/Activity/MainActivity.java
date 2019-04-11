@@ -25,6 +25,8 @@ import com.example.serviceschat.Entidades.MensajeEnviar;
 import com.example.serviceschat.Entidades.MensajeRecibir;
 import com.example.serviceschat.Entidades.Usuario;
 import com.example.serviceschat.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
         cerrarSesion = (Button) findViewById(R.id.cerrarSesion);
         fotoPerfilCadena = "";
 
-
-
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("chat/v2");
         storage = FirebaseStorage.getInstance();
@@ -116,19 +116,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         fotoPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.setType("image/jpeg");
-                i.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                startActivityForResult(Intent.createChooser(i, "selecciona una foto"), PHOTO_PERFIL);
+                i.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
+                startActivityForResult(Intent.createChooser(i,"Selecciona una foto"),PHOTO_PERFIL);
 
             }
-                                      }
-
-
-        );
+        });
 
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -165,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         verifyStoragePermissions(this);
 
     }
@@ -195,34 +194,55 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO_SEND && resultCode == RESULT_OK) {
-            final Uri u = data.getData();
+            Uri u = data.getData();
             storageReference = storage.getReference("imagenes");
             assert u != null;
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fotoReferencia.putFile(u).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
-                    MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO+"te ha enviado una foto", u.toString(),NOMBRE_USUARIO, fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
-                    databaseReference.push().setValue(m);
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+                    return fotoReferencia.getDownloadUrl();
                 }
-
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO + "te ha enviado una foto", uri.toString(), NOMBRE_USUARIO, fotoPerfilCadena, "2", ServerValue.TIMESTAMP);
+                        databaseReference.push().setValue(m);
+                    }
+                }
             });
         } else if (requestCode == PHOTO_PERFIL && resultCode == RESULT_OK) {
 
             final Uri u = data.getData();
             storageReference = storage.getReference("foto_perfil");
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+            fotoReferencia.putFile(u).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
-                    fotoPerfilCadena = u.toString();
-                    MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO+"ha actualizado su foto de peril", u.toString(),NOMBRE_USUARIO,fotoPerfilCadena,"2", ServerValue.TIMESTAMP);
-                    databaseReference.push().setValue(m);
-                    Glide.with(MainActivity.this).load(u.toString()).into(fotoPerfil);
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+                    return fotoReferencia.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        fotoPerfilCadena = uri.toString();
+                        MensajeEnviar m = new MensajeEnviar(NOMBRE_USUARIO+"ha actualizado su foto de peril", uri.toString(),NOMBRE_USUARIO,fotoPerfilCadena,"2", ServerValue.TIMESTAMP);
+                        databaseReference.push().setValue(m);
+                        Glide.with(MainActivity.this).load(uri.toString()).into(fotoPerfil);
+                    }
                 }
             });
+
         }
 
     }
