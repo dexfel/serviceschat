@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@android:color/holo_blue_light">
+    android:background="@android:color/darker_gray">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,8 @@
         android:id="@+id/idLoginLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Login"/>
+        android:hint="Login"
+        android:background="@drawable/boton_circular"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,6 +39,7 @@
             android:id="@+id/idRegistroLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/boton_circular"
             android:hint="Registrarse"/>
     </LinearLayout>
 
