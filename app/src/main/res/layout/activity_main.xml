@@ -7,8 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity"
     android:padding="5sp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/holo_blue_dark"
 
+    >
 
 
     <LinearLayout
@@ -26,17 +28,19 @@
             android:id="@+id/nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Umg progra 3"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:text="Umg progra 3" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end|center">
+
             <Button
                 android:id="@+id/cerrarSesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Cerrar Sesión"/>
+                android:hint="Cerrar Sesión" />
         </LinearLayout>
 
     </LinearLayout>
@@ -44,7 +48,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMensajes"
         android:layout_width="match_parent"
-        android:layout_height="486dp">
+        android:layout_height="531dp">
         android:layout_weight="1"></android.support.v7.widget.RecyclerView>
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +64,7 @@
         <EditText
             android:id="@+id/txtMensaje"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="Escribe un mensaje" />
         <Button
