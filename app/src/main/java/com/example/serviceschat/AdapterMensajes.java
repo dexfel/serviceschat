@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.serviceschat.Entidades.MensajeRecibir;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,13 +39,20 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
     public void onBindViewHolder(HolderMensaje holder, int position) {
 holder.getNombre().setText(listMensaje.get(position).getNombre());
 holder.getMensaje().setText(listMensaje.get(position).getMensaje());
+
 if(listMensaje.get(position).getType_mensaje().equals("2")){
-holder.getFotoMensaje().setVisibility(View.VISIBLE);
-holder.getMensaje().setVisibility(View.VISIBLE);
-Glide.with(c).load(listMensaje.get(position).getUrlFoto()).into(holder.getFotoMensaje());
+        holder.getFotoMensaje().setVisibility(View.VISIBLE);
+        holder.getMensaje().setVisibility(View.VISIBLE);
+        Glide.with(c).load(listMensaje.get(position).getUrlFoto()).into(holder.getFotoMensaje());
 }else if(listMensaje.get(position).getType_mensaje().equals("1")) {
     holder.getFotoMensaje().setVisibility(View.GONE);
     holder.getMensaje().setVisibility(View.VISIBLE);
+}
+
+if(listMensaje.get(position).getFotoPerfil().isEmpty()){
+    holder.getFotoMensajePerfil().setImageResource(R.mipmap.ic_launcher);
+}else{
+    Glide.with(c).load(listMensaje.get(position).getFotoPerfil()).into(holder.getFotoMensajePerfil());
 }
      Long codigoHora = listMensaje.get(position).getHora();
      Date d= new Date(codigoHora);

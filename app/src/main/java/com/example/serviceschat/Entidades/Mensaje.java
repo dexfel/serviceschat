@@ -1,4 +1,4 @@
-package com.example.serviceschat;
+package com.example.serviceschat.Entidades;
 
 public class Mensaje {
 private String mensaje;
@@ -56,7 +56,6 @@ private String type_mensaje;
     public void setType_mensaje(String type_mensaje) {
         this.type_mensaje = type_mensaje;
     }
-
     public String getUrlFoto() {
         return urlFoto;
     }
