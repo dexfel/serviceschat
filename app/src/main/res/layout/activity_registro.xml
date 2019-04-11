@@ -13,28 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre"
-        android:background="@drawable/boton_circular"/>
+        android:background="@drawable/btn_ln"/>
     <EditText
         android:id="@+id/idRegistroCorreo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Correo"
         android:inputType="textEmailAddress"
-        android:background="@drawable/boton_circular"/>
+        android:background="@drawable/btn_ln"/>
     <EditText
         android:id="@+id/idRegistroContraseña"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:background="@drawable/boton_circular"/>
+        android:background="@drawable/btn_ln"/>
     <EditText
         android:id="@+id/idRegistroContraseñaRepetida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Repetir contraseña"
         android:inputType="textPassword"
-        android:background="@drawable/boton_circular"/>
+        android:background="@drawable/btn_ln"/>
 
     <Button
         android:id="@+id/idRegistroRegistrar"
