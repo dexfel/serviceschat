@@ -57,7 +57,9 @@
             android:id="@+id/btnEnviar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="ENVIAR"/>
+            android:hint="ENVIAR"
+            android:background="@drawable/boton_redondo"
+            />
 
     </LinearLayout>
 
