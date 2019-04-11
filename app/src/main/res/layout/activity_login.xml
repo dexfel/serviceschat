@@ -39,8 +39,8 @@
             android:id="@+id/idRegistroLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/boton_circular"
-            android:hint="Registrarse"/>
+            android:hint="Registrarse"
+            android:background="@drawable/boton_circular"/>
     </LinearLayout>
 
 </LinearLayout>
